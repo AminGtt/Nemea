@@ -1,1 +1,14 @@
+.DS_Store
+
 node_modules/
+
+# Secrets
+.env
+.env.local
+.env.production.local
+.env.development.local
+
+# Editors specific
+.fleet
+.idea
+.vscode
