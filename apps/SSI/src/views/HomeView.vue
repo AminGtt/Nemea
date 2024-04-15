@@ -1,7 +1,11 @@
 <script setup>
 
+import Skybox from '@/components/Skybox.vue'
+
 import { TresCanvas } from '@tresjs/core'
-import { Sphere, OrbitControls } from '@tresjs/cientos'
+import { OrbitControls } from '@tresjs/cientos'
+
+
 
 </script>
 
@@ -9,15 +13,28 @@ import { Sphere, OrbitControls } from '@tresjs/cientos'
 
   <main>
     <TresCanvas 
-      id="scene" 
-      window-size
-      clear-color="#82DBC5"
-      >
+    id="scene" 
+    window-size
+    clear-color="#82DBC5"
+    >
+      <TresPerspectiveCamera :position="[-10, 10, 10]" />
+      <OrbitControls :enable-pan="false" :max-distance="900" />
+      <TresAmbientLight :position="1" :intensity="0.2" />
+    
+      <Suspense>
+        <Skybox />
+      </Suspense>
 
-      <OrbitControls />
-      
-      <Sphere :args="[2, 50, 50]" color="pink" />
+      <TresMesh :position="[0, 0, 0]">
+        <TresBoxGeometry :args="[1, 1, 2]" />
+        <TresMeshStandardMaterial color="orange" />
+      </TresMesh>
 
+      <TresMesh :position="[0, 0, 2]">
+        <TresBoxGeometry :args="[1, 1, 1]" />
+        <TresMeshStandardMaterial color="red" />
+      </TresMesh>
+  
     </TresCanvas>
     
     <section id="ui">
@@ -32,10 +49,10 @@ import { Sphere, OrbitControls } from '@tresjs/cientos'
     z-index: 999
     position: relative
 
-  h1
-    color: purple
-    text-align: center
-    top: 80vh
-    position: relative
+    h1
+      color: purple
+      text-align: center
+      top: 80vh
+      position: relative
 
 </style>
